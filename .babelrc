@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "latest",
+      {
+        "modules": false
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-runtime"
+  ]
+}
