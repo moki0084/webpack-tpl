@@ -1,0 +1,9 @@
+{
+  "name": "dll",
+  "content": {
+    "../node_modules/jquery/dist/jquery.js": {
+      "id": 0,
+      "meta": {}
+    }
+  }
+}

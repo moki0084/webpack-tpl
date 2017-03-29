@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && set NODE_ENV=production&& webpack",
-    "dev": "set NODE_ENV=development&& node dev-server.js"
+    "dll": "rimraf dll && webpack --config ./build/webpack.config.dll.js &&rimraf dist && webpack --config ./build/webpack.config.prod.js",
+    "dev": "node ./build/dev-server.js",
+    "build": "rimraf dist && webpack --config ./build/webpack.config.prod.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^3.2.1",
     "webpack-dev-server": "^2.4.1"
   },
   "devDependencies": {
+    "add-asset-html-webpack-plugin": "^1.0.2",
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.4.0",
@@ -35,6 +38,7 @@
     "sass-loader": "^6.0.3",
     "style-loader": "^0.13.2",
     "url-loader": "^0.5.8",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-merge": "^4.1.0"
   }
 }

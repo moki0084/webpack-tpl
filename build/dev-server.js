@@ -1,6 +1,6 @@
 var WebpackDevServer = require('webpack-dev-server');
 var webpack = require('webpack');
-var config = require('./webpack.config.js');
+var config = require('./webpack.config.dev.js');
 var path = require('path');
 /*
 * 1 当以命令行启动webpack-dev-server时,需要做两点：
