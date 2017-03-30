@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
-var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+var dll = require('../dll/dll.json')
 
 module.exports = {
   entry: {
@@ -35,12 +36,17 @@ module.exports = {
     }),
     new webpack.DllReferencePlugin({
       context: path.resolve(__dirname, '../dll'),
-      manifest: require('../dll/dll.json'),
-      name: 'dll'
+      manifest: dll,
+      name: dll.name
     }),
     new AddAssetHtmlPlugin({
-      filepath: require.resolve('../dll/dll.js'),
+      filepath: require.resolve('../dll/' + dll.name + '.js'),
       includeSourcemap: false
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: '[name].[chunkhash].js',
+      minChunks: 4,
     })
   ],
   output: {

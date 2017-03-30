@@ -43,7 +43,7 @@ module.exports = {
   plugins: [
     new webpack.DllPlugin({
       path: path.join(__dirname, "../dll", "[name].json"),
-      name: '[name]',
+      name: '[name][chunkhash]',
       context: path.resolve(__dirname, '../dll')
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -67,7 +67,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '../dll'),
-    filename: '[name].js',
-    library: '[name]',
+    filename: '[name][chunkhash].js',
+    library: '[name][chunkhash]',
   }
 };
