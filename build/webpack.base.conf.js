@@ -23,7 +23,7 @@ module.exports = {
       {
         test: /\.(gif|png|jpg)$/,
         exclude: /node_modules/,
-        use: 'url-loader?limit=10000&name=images/[name].[ext]?[hash:10]'
+        use: 'url-loader?limit=10000&name=images/[name].[ext]?[hash:8]'
       }
     ]
   },
@@ -45,7 +45,7 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
-      filename: '[name].[chunkhash].js',
+      filename: 'js/[name].[chunkhash].js',
       minChunks: 4,
     })
   ],

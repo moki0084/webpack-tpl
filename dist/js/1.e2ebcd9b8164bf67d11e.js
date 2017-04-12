@@ -1,0 +1,1 @@
+webpackJsonp([1,3],[function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});e.Button={button:'<button id="myButton">Press Me</button>',attachEl:function(){document.getElementById("myButton").addEventListener("click",function(){alert("Clicked")})}}}]);

@@ -3,6 +3,9 @@ var baseWebpackConfig = require('./webpack.base.conf');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+var AssetsPlugin = require('assets-webpack-plugin');
+var path = require('path');
+var dll = require('../dll/dll.json')
 
 module.exports = webpackMerge(baseWebpackConfig, {
   module: {
@@ -11,14 +14,30 @@ module.exports = webpackMerge(baseWebpackConfig, {
         test: /\.css$/,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
-          use: 'css-loader?minimize'
-        }),
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }, {
+            loader: 'postcss-loader'
+          }]
+        })
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
-          use: 'css-loader?minimize!sass-loader'
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }, {
+            loader: 'postcss-loader'
+          }, {
+            loader: 'sass-loader'
+          }]
         })
       }
     ]
@@ -42,11 +61,18 @@ module.exports = webpackMerge(baseWebpackConfig, {
     new ExtractTextPlugin('css/[name].[chunkhash].css'),
     new HTMLWebpackPlugin({
       template: './src/index.html'
+    }),
+    new AssetsPlugin({
+      filename: 'map.json',
+      path: path.resolve(__dirname, '../dist'),
+      metadata: {
+        dll: dll.name + '.js'
+      }
     })
   ],
   output: {
-    publicPath:'', //输出资源的基本路径
-    filename: 'js/[name].[chunkhash].min.js',
-    chunkFilename: 'js/[id].[chunkhash].min.js'
+    publicPath: '', //输出资源的基本路径
+    filename: 'js/[name].[chunkhash].js',
+    chunkFilename: 'js/[id].[chunkhash].js'
   }
 })

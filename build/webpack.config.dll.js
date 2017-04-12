@@ -22,20 +22,42 @@ module.exports = {
       {
         test: /\.(gif|png|jpg)$/,
         exclude: /node_modules/,
-        use: 'url-loader?limit=10000&name=images/[name].[ext]?[hash:10]'
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: 'images/[name].[ext]?[hash:10]'
+          }
+        }]
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
-          use: 'css-loader?minimize'
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }, {
+            loader: 'postcss-loader'
+          }]
         })
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
-          use: 'css-loader?minimize!sass-loader'
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }, {
+            loader: 'postcss-loader'
+          }, {
+            loader: 'sass-loader'
+          }]
         })
       }
     ]
